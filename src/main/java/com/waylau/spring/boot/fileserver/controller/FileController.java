@@ -39,6 +39,8 @@ public class FileController {
 	@Value("${server.address}")
 	private String serverAddress;
 
+	private  String returnAddress = "47.111.112.220";
+
 	@Value("${server.port}")
 	private String serverPort;
 
@@ -153,7 +155,7 @@ public class FileController {
 					new Binary(file.getBytes()));
 			f.setMd5(MD5Util.getMD5(file.getInputStream()));
 			returnFile = fileService.saveFile(f);
-			String path = "//" + serverAddress + ":" + serverPort + "/view/" + returnFile.getId();
+			String path = "//" + returnAddress + ":" + serverPort + "/view/" + returnFile.getId();
 			return ResponseEntity.status(HttpStatus.OK).body(path);
 
 		} catch (IOException | NoSuchAlgorithmException ex) {
